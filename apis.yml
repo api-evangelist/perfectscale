@@ -1,0 +1,37 @@
+aid: perfectscale
+name: PerfectScale
+description: >-
+  PerfectScale is a Kubernetes cost optimization platform providing autonomous
+  scaling and resource rightsizing.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - FinOps
+  - Kubernetes
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/perfectscale/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: perfectscale:perfectscale
+    name: PerfectScale
+    description: >-
+      PerfectScale is a Kubernetes cost optimization platform providing
+      autonomous scaling and resource rightsizing.
+    humanURL: https://www.perfectscale.io/
+    tags:
+      - FinOps
+    properties:
+      - type: Documentation
+        url: https://docs.perfectscale.io/
+      - type: Getting Started
+        url: https://docs.perfectscale.io/
+common:
+  - type: Website
+    url: https://www.perfectscale.io/
+  - type: Documentation
+    url: https://docs.perfectscale.io/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
