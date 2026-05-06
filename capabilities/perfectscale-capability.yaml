@@ -1,0 +1,275 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PerfectScale Public API
+  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
+    metrics, and automation audit logs. Available with the EXPERT package.
+  tags:
+  - Perfectscale
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: perfectscale
+    baseUri: https://api.app.perfectscale.io/public/v1
+    description: PerfectScale Public API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{PERFECTSCALE_TOKEN}}'
+    resources:
+    - name: auth-public-auth
+      path: /auth/public_auth
+      operations:
+      - name: authenticate
+        method: POST
+        description: Obtain access token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters
+      path: /clusters
+      operations:
+      - name: listclusters
+        method: GET
+        description: List clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-cluster-uid
+      path: /clusters/{cluster_uid}
+      operations:
+      - name: getcluster
+        method: GET
+        description: Get cluster details
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+        - name: period
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletecluster
+        method: DELETE
+        description: Remove cluster
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-cluster-uid-workloads
+      path: /clusters/{cluster_uid}/workloads
+      operations:
+      - name: listworkloads
+        method: GET
+        description: List cluster workloads
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+        - name: period
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation-audit-logs
+      path: /automation/audit_logs
+      operations:
+      - name: getautomationauditlogs
+        method: POST
+        description: Retrieve automation audit logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: perfectscale-rest
+    description: REST adapter for PerfectScale Public API.
+    resources:
+    - path: /auth/public_auth
+      name: authenticate
+      operations:
+      - method: POST
+        name: authenticate
+        description: Obtain access token
+        call: perfectscale.authenticate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clusters
+      name: listclusters
+      operations:
+      - method: GET
+        name: listclusters
+        description: List clusters
+        call: perfectscale.listclusters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clusters/{cluster_uid}
+      name: getcluster
+      operations:
+      - method: GET
+        name: getcluster
+        description: Get cluster details
+        call: perfectscale.getcluster
+        with:
+          cluster_uid: rest.cluster_uid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clusters/{cluster_uid}
+      name: deletecluster
+      operations:
+      - method: DELETE
+        name: deletecluster
+        description: Remove cluster
+        call: perfectscale.deletecluster
+        with:
+          cluster_uid: rest.cluster_uid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /clusters/{cluster_uid}/workloads
+      name: listworkloads
+      operations:
+      - method: GET
+        name: listworkloads
+        description: List cluster workloads
+        call: perfectscale.listworkloads
+        with:
+          cluster_uid: rest.cluster_uid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /automation/audit_logs
+      name: getautomationauditlogs
+      operations:
+      - method: POST
+        name: getautomationauditlogs
+        description: Retrieve automation audit logs
+        call: perfectscale.getautomationauditlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: perfectscale-mcp
+    transport: http
+    description: MCP adapter for PerfectScale Public API for AI agent use.
+    tools:
+    - name: authenticate
+      description: Obtain access token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: perfectscale.authenticate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listclusters
+      description: List clusters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale.listclusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcluster
+      description: Get cluster details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale.getcluster
+      with:
+        cluster_uid: tools.cluster_uid
+        period: tools.period
+      inputParameters:
+      - name: cluster_uid
+        type: string
+        description: cluster_uid
+        required: true
+      - name: period
+        type: string
+        description: period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletecluster
+      description: Remove cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: perfectscale.deletecluster
+      with:
+        cluster_uid: tools.cluster_uid
+      inputParameters:
+      - name: cluster_uid
+        type: string
+        description: cluster_uid
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listworkloads
+      description: List cluster workloads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale.listworkloads
+      with:
+        cluster_uid: tools.cluster_uid
+        period: tools.period
+      inputParameters:
+      - name: cluster_uid
+        type: string
+        description: cluster_uid
+        required: true
+      - name: period
+        type: string
+        description: period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getautomationauditlogs
+      description: Retrieve automation audit logs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: perfectscale.getautomationauditlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    PERFECTSCALE_TOKEN: PERFECTSCALE_TOKEN
