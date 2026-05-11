@@ -39,6 +39,11 @@ common:
     url: https://www.perfectscale.io/
   - type: Documentation
     url: https://docs.perfectscale.io/
+  - type: Integrations
+    url: https://www.perfectscale.io/integrations
+integrations:
+  - name: Slack
+  - name: PerfectScale
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
