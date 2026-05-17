@@ -30,7 +30,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.perfectscale.io/api/public-api.md
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.perfectscale.io/
       - type: OpenAPI
         url: openapi/perfectscale-perfectscale-openapi.yml
