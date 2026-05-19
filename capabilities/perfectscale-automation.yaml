@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PerfectScale Public API — Automation
+  description: 'PerfectScale Public API — Automation. 1 operations. Lead operation: Retrieve automation audit logs. Self-contained
+    Naftiko capability covering one Perfectscale business surface.'
+  tags:
+  - Perfectscale
+  - Automation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFECTSCALE_API_KEY: PERFECTSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: perfectscale-automation
+    baseUri: https://api.app.perfectscale.io/public/v1
+    description: PerfectScale Public API — Automation business capability. Self-contained, no shared references.
+    resources:
+    - name: automation-audit_logs
+      path: /automation/audit_logs
+      operations:
+      - name: getautomationauditlogs
+        method: POST
+        description: Retrieve automation audit logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PERFECTSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: perfectscale-automation-rest
+    port: 8080
+    description: REST adapter for PerfectScale Public API — Automation. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/automation/audit-logs
+      name: automation-audit-logs
+      description: REST surface for automation-audit_logs.
+      operations:
+      - method: POST
+        name: getautomationauditlogs
+        description: Retrieve automation audit logs
+        call: perfectscale-automation.getautomationauditlogs
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: perfectscale-automation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PerfectScale Public API — Automation. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-automation-audit-logs
+      description: Retrieve automation audit logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: perfectscale-automation.getautomationauditlogs
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

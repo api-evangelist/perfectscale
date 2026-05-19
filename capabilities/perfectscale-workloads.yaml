@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PerfectScale Public API — Workloads
+  description: 'PerfectScale Public API — Workloads. 1 operations. Lead operation: List cluster workloads. Self-contained
+    Naftiko capability covering one Perfectscale business surface.'
+  tags:
+  - Perfectscale
+  - Workloads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFECTSCALE_API_KEY: PERFECTSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: perfectscale-workloads
+    baseUri: https://api.app.perfectscale.io/public/v1
+    description: PerfectScale Public API — Workloads business capability. Self-contained, no shared references.
+    resources:
+    - name: clusters-cluster_uid-workloads
+      path: /clusters/{cluster_uid}/workloads
+      operations:
+      - name: listworkloads
+        method: GET
+        description: List cluster workloads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+        - name: period
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.PERFECTSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: perfectscale-workloads-rest
+    port: 8080
+    description: REST adapter for PerfectScale Public API — Workloads. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/clusters/{cluster-uid}/workloads
+      name: clusters-cluster-uid-workloads
+      description: REST surface for clusters-cluster_uid-workloads.
+      operations:
+      - method: GET
+        name: listworkloads
+        description: List cluster workloads
+        call: perfectscale-workloads.listworkloads
+        with:
+          cluster_uid: rest.cluster_uid
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: perfectscale-workloads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PerfectScale Public API — Workloads. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-cluster-workloads
+      description: List cluster workloads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale-workloads.listworkloads
+      with:
+        cluster_uid: tools.cluster_uid
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.

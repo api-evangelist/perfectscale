@@ -1,0 +1,150 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PerfectScale Public API — Clusters
+  description: 'PerfectScale Public API — Clusters. 3 operations. Lead operation: List clusters. Self-contained Naftiko capability
+    covering one Perfectscale business surface.'
+  tags:
+  - Perfectscale
+  - Clusters
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFECTSCALE_API_KEY: PERFECTSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: perfectscale-clusters
+    baseUri: https://api.app.perfectscale.io/public/v1
+    description: PerfectScale Public API — Clusters business capability. Self-contained, no shared references.
+    resources:
+    - name: clusters
+      path: /clusters
+      operations:
+      - name: listclusters
+        method: GET
+        description: List clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-cluster_uid
+      path: /clusters/{cluster_uid}
+      operations:
+      - name: getcluster
+        method: GET
+        description: Get cluster details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+        - name: period
+          in: query
+          type: string
+      - name: deletecluster
+        method: DELETE
+        description: Remove cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cluster_uid
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.PERFECTSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: perfectscale-clusters-rest
+    port: 8080
+    description: REST adapter for PerfectScale Public API — Clusters. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/clusters
+      name: clusters
+      description: REST surface for clusters.
+      operations:
+      - method: GET
+        name: listclusters
+        description: List clusters
+        call: perfectscale-clusters.listclusters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{cluster-uid}
+      name: clusters-cluster-uid
+      description: REST surface for clusters-cluster_uid.
+      operations:
+      - method: GET
+        name: getcluster
+        description: Get cluster details
+        call: perfectscale-clusters.getcluster
+        with:
+          cluster_uid: rest.cluster_uid
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecluster
+        description: Remove cluster
+        call: perfectscale-clusters.deletecluster
+        with:
+          cluster_uid: rest.cluster_uid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: perfectscale-clusters-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PerfectScale Public API — Clusters. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-clusters
+      description: List clusters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale-clusters.listclusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cluster-details
+      description: Get cluster details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: perfectscale-clusters.getcluster
+      with:
+        cluster_uid: tools.cluster_uid
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-cluster
+      description: Remove cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: perfectscale-clusters.deletecluster
+      with:
+        cluster_uid: tools.cluster_uid
+      outputParameters:
+      - type: object
+        mapping: $.
