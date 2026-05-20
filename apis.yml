@@ -6,50 +6,52 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- FinOps
-- Kubernetes
-- Cost Optimization
+  - FinOps
+  - Kubernetes
+  - Cost Optimization
 url: https://raw.githubusercontent.com/api-evangelist/perfectscale/refs/heads/main/apis.yml
 created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.20'
 apis:
-- aid: perfectscale:perfectscale
-  name: PerfectScale Public API
-  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
-    metrics, and automation audit logs.
-  humanURL: https://www.perfectscale.io/
-  baseURL: https://api.app.perfectscale.io/public/v1
-  tags:
-  - FinOps
-  - Kubernetes
-  properties:
-  - type: Documentation
-    url: https://docs.perfectscale.io/api/public-api.md
-  - type: GettingStarted
-    url: https://docs.perfectscale.io/
-  - type: OpenAPI
-    url: openapi/perfectscale-perfectscale-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/perfectscale-authentication.yaml
-  - type: NaftikoCapability
-    url: capabilities/perfectscale-automation.yaml
-  - type: NaftikoCapability
-    url: capabilities/perfectscale-clusters.yaml
-  - type: NaftikoCapability
-    url: capabilities/perfectscale-workloads.yaml
+  - aid: perfectscale:perfectscale
+    name: PerfectScale Public API
+    description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
+      metrics, and automation audit logs.
+    humanURL: https://www.perfectscale.io/
+    baseURL: https://api.app.perfectscale.io/public/v1
+    tags:
+    - FinOps
+    - Kubernetes
+    properties:
+    - type: Documentation
+      url: https://docs.perfectscale.io/api/public-api.md
+    - type: GettingStarted
+      url: https://docs.perfectscale.io/
+    - type: OpenAPI
+      url: openapi/perfectscale-perfectscale-openapi.yml
+    - type: NaftikoCapability
+      url: capabilities/perfectscale-authentication.yaml
+    - type: NaftikoCapability
+      url: capabilities/perfectscale-automation.yaml
+    - type: NaftikoCapability
+      url: capabilities/perfectscale-clusters.yaml
+    - type: NaftikoCapability
+      url: capabilities/perfectscale-workloads.yaml
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/perfectscale
-- type: Website
-  url: https://www.perfectscale.io/
-- type: Documentation
-  url: https://docs.perfectscale.io/
-- type: Integrations
-  url: https://www.perfectscale.io/integrations
+  - type: GitHubOrganization
+    url: https://github.com/perfectscale-io
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/perfectscale
+  - type: Website
+    url: https://www.perfectscale.io/
+  - type: Documentation
+    url: https://docs.perfectscale.io/
+  - type: Integrations
+    url: https://www.perfectscale.io/integrations
 integrations:
-- name: Slack
-- name: PerfectScale
+  - name: Slack
+  - name: PerfectScale
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
