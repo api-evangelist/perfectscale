@@ -49,6 +49,8 @@ common:
     url: https://docs.perfectscale.io/
   - type: Integrations
     url: https://www.perfectscale.io/integrations
+  - type: LLMsTxt
+    url: https://docs.perfectscale.io/llms.txt
 integrations:
   - name: Slack
   - name: PerfectScale
