@@ -16,28 +16,21 @@ specificationVersion: '0.20'
 apis:
   - aid: perfectscale:perfectscale
     name: PerfectScale Public API
-    description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
+    description: >-
+      PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
       metrics, and automation audit logs.
     humanURL: https://www.perfectscale.io/
     baseURL: https://api.app.perfectscale.io/public/v1
     tags:
-    - FinOps
-    - Kubernetes
+      - FinOps
+      - Kubernetes
     properties:
-    - type: Documentation
-      url: https://docs.perfectscale.io/api/public-api.md
-    - type: GettingStarted
-      url: https://docs.perfectscale.io/
-    - type: OpenAPI
-      url: openapi/perfectscale-perfectscale-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/perfectscale-authentication.yaml
-    - type: NaftikoCapability
-      url: capabilities/perfectscale-automation.yaml
-    - type: NaftikoCapability
-      url: capabilities/perfectscale-clusters.yaml
-    - type: NaftikoCapability
-      url: capabilities/perfectscale-workloads.yaml
+      - type: Documentation
+        url: https://docs.perfectscale.io/api/public-api.md
+      - type: GettingStarted
+        url: https://docs.perfectscale.io/
+      - type: OpenAPI
+        url: openapi/perfectscale-perfectscale-openapi.yml
 common:
   - type: GitHubOrganization
     url: https://github.com/perfectscale-io

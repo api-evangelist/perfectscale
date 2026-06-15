@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PerfectScale Public API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.perfectscale.io/public/v1/auth/public_auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchanges client credentials for a JWT bearer token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters"
+          },
+          "docs": "Returns all clusters connected to PerfectScale."
+        },
+        {
+          "info": {
+            "name": "Get cluster details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters/:cluster_uid",
+            "params": [
+              {
+                "name": "cluster_uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get cluster details"
+        },
+        {
+          "info": {
+            "name": "Remove cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters/:cluster_uid",
+            "params": [
+              {
+                "name": "cluster_uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove cluster"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List cluster workloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters/:cluster_uid/workloads",
+            "params": [
+              {
+                "name": "cluster_uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all workloads with metrics, cost, and optimization policy data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Automation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve automation audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.perfectscale.io/public/v1/automation/audit_logs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns automation actions from the last 30 days with cursor pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
