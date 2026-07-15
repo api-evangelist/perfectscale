@@ -32,6 +32,8 @@ apis:
       - type: OpenAPI
         url: openapi/perfectscale-perfectscale-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/perfectscale-agentic-access.yml
   - type: DomainSecurity
     url: security/perfectscale-domain-security.yml
   - type: Authentication
