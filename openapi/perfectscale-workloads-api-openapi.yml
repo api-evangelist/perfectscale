@@ -1,0 +1,49 @@
+openapi: 3.1.0
+info:
+  title: PerfectScale Public Authentication Workloads API
+  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload metrics, and automation audit logs. Available with the EXPERT package.
+  version: '1.0'
+  contact:
+    name: PerfectScale Support
+    url: https://docs.perfectscale.io/
+servers:
+- url: https://api.app.perfectscale.io/public/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Workloads
+  description: Workload metrics and analysis
+paths:
+  /clusters/{cluster_uid}/workloads:
+    get:
+      operationId: listWorkloads
+      summary: List cluster workloads
+      description: Returns all workloads with metrics, cost, and optimization policy data.
+      tags:
+      - Workloads
+      parameters:
+      - name: cluster_uid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: period
+        in: query
+        schema:
+          type: string
+          description: Period from 1h to 30d
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Documentation
+  url: https://docs.perfectscale.io/api/public-api.md

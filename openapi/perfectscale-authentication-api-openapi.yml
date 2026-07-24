@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: PerfectScale Public Authentication API
+  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload metrics, and automation audit logs. Available with the EXPERT package.
+  version: '1.0'
+  contact:
+    name: PerfectScale Support
+    url: https://docs.perfectscale.io/
+servers:
+- url: https://api.app.perfectscale.io/public/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: Authentication and access tokens
+paths:
+  /auth/public_auth:
+    post:
+      operationId: authenticate
+      summary: Obtain access token
+      description: Exchanges client credentials for a JWT bearer token.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - client_id
+              - client_secret
+              properties:
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+        '401':
+          description: Invalid credentials
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Documentation
+  url: https://docs.perfectscale.io/api/public-api.md

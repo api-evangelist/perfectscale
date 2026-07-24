@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: PerfectScale Public Authentication Clusters API
+  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload metrics, and automation audit logs. Available with the EXPERT package.
+  version: '1.0'
+  contact:
+    name: PerfectScale Support
+    url: https://docs.perfectscale.io/
+servers:
+- url: https://api.app.perfectscale.io/public/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Clusters
+  description: Kubernetes cluster operations
+paths:
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: List clusters
+      description: Returns all clusters connected to PerfectScale.
+      tags:
+      - Clusters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests
+  /clusters/{cluster_uid}:
+    get:
+      operationId: getCluster
+      summary: Get cluster details
+      tags:
+      - Clusters
+      parameters:
+      - name: cluster_uid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: period
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    delete:
+      operationId: deleteCluster
+      summary: Remove cluster
+      tags:
+      - Clusters
+      parameters:
+      - name: cluster_uid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Removed
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Documentation
+  url: https://docs.perfectscale.io/api/public-api.md

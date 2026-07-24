@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: PerfectScale Public Authentication Automation API
+  description: PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload metrics, and automation audit logs. Available with the EXPERT package.
+  version: '1.0'
+  contact:
+    name: PerfectScale Support
+    url: https://docs.perfectscale.io/
+servers:
+- url: https://api.app.perfectscale.io/public/v1
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Automation
+  description: Automation audit logs
+paths:
+  /automation/audit_logs:
+    post:
+      operationId: getAutomationAuditLogs
+      summary: Retrieve automation audit logs
+      description: Returns automation actions from the last 30 days with cursor pagination.
+      tags:
+      - Automation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  format: date-time
+                to:
+                  type: string
+                  format: date-time
+                page_size:
+                  type: integer
+                after:
+                  type: string
+                before:
+                  type: string
+                cluster_uids:
+                  type: array
+                  items:
+                    type: string
+                namespaces:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Documentation
+  url: https://docs.perfectscale.io/api/public-api.md
