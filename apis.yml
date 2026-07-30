@@ -2,9 +2,22 @@ aid: perfectscale
 name: PerfectScale
 description: PerfectScale is a Kubernetes cost optimization platform providing autonomous scaling and resource rightsizing.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/perfectscale.png
 tags:
   - FinOps
   - Kubernetes
@@ -14,23 +27,62 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.20'
 apis:
-  - aid: perfectscale:perfectscale
-    name: PerfectScale Public API
-    description: >-
-      PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload
-      metrics, and automation audit logs.
-    humanURL: https://www.perfectscale.io/
-    baseURL: https://api.app.perfectscale.io/public/v1
-    tags:
-      - FinOps
-      - Kubernetes
-    properties:
-      - type: Documentation
-        url: https://docs.perfectscale.io/api/public-api.md
-      - type: GettingStarted
-        url: https://docs.perfectscale.io/
-      - type: OpenAPI
-        url: openapi/perfectscale-perfectscale-openapi.yml
+- aid: perfectscale:perfectscale-authentication-api
+  name: PerfectScale Authentication API
+  description: Authentication and access tokens
+  humanURL: https://www.perfectscale.io/
+  baseURL: https://api.app.perfectscale.io/public/v1
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/perfectscale-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.perfectscale.io/api/public-api.md
+  - type: GettingStarted
+    url: https://docs.perfectscale.io/
+- aid: perfectscale:perfectscale-automation-api
+  name: PerfectScale Automation API
+  description: Automation audit logs
+  humanURL: https://www.perfectscale.io/
+  baseURL: https://api.app.perfectscale.io/public/v1
+  tags:
+  - Automation
+  properties:
+  - type: OpenAPI
+    url: openapi/perfectscale-automation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.perfectscale.io/api/public-api.md
+  - type: GettingStarted
+    url: https://docs.perfectscale.io/
+- aid: perfectscale:perfectscale-clusters-api
+  name: PerfectScale Clusters API
+  description: Kubernetes cluster operations
+  humanURL: https://www.perfectscale.io/
+  baseURL: https://api.app.perfectscale.io/public/v1
+  tags:
+  - Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/perfectscale-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.perfectscale.io/api/public-api.md
+  - type: GettingStarted
+    url: https://docs.perfectscale.io/
+- aid: perfectscale:perfectscale-workloads-api
+  name: PerfectScale Workloads API
+  description: Workload metrics and analysis
+  humanURL: https://www.perfectscale.io/
+  baseURL: https://api.app.perfectscale.io/public/v1
+  tags:
+  - Workloads
+  properties:
+  - type: OpenAPI
+    url: openapi/perfectscale-workloads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.perfectscale.io/api/public-api.md
+  - type: GettingStarted
+    url: https://docs.perfectscale.io/
 common:
   - type: AgenticAccess
     url: agentic-access/perfectscale-agentic-access.yml
