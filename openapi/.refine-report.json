@@ -1,0 +1,20 @@
+{
+  "provider": "perfectscale",
+  "sources": [
+    "perfectscale-authentication-api-openapi.yml",
+    "perfectscale-automation-api-openapi.yml",
+    "perfectscale-clusters-api-openapi.yml",
+    "perfectscale-workloads-api-openapi.yml"
+  ],
+  "outputs": [
+    "perfectscale-authentication-api-openapi.yml",
+    "perfectscale-automation-api-openapi.yml",
+    "perfectscale-clusters-api-openapi.yml",
+    "perfectscale-workloads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
