@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PerfectScale Public Authentication Clusters API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters"
+          },
+          "docs": "Returns all clusters connected to PerfectScale."
+        },
+        {
+          "info": {
+            "name": "Get cluster details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters/:cluster_uid",
+            "params": [
+              {
+                "name": "cluster_uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get cluster details"
+        },
+        {
+          "info": {
+            "name": "Remove cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.perfectscale.io/public/v1/clusters/:cluster_uid",
+            "params": [
+              {
+                "name": "cluster_uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove cluster"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

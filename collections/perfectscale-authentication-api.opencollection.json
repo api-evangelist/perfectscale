@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PerfectScale Public Authentication API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.perfectscale.io/public/v1/auth/public_auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchanges client credentials for a JWT bearer token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "5daffaf0-aeb7-434f-a61a-eac54f9312e9",
+      "name": "Automation",
+      "description": {
+        "content": "Automation audit logs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee5601a0-307e-480c-921c-5f94be03f861",
+          "name": "Retrieve automation audit logs",
+          "request": {
+            "name": "Retrieve automation audit logs",
+            "description": {
+              "content": "Returns automation actions from the last 30 days with cursor pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "automation",
+                "audit_logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<dateTime>\",\n  \"to\": \"<dateTime>\",\n  \"page_size\": \"<integer>\",\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"cluster_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "090922ba-3670-4c6e-a40b-93ffcae24531",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "automation",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<dateTime>\",\n  \"to\": \"<dateTime>\",\n  \"page_size\": \"<integer>\",\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"cluster_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b8a8fdb-809d-4689-9b84-80175b86ca75",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "automation",
+                    "audit_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<dateTime>\",\n  \"to\": \"<dateTime>\",\n  \"page_size\": \"<integer>\",\n  \"after\": \"<string>\",\n  \"before\": \"<string>\",\n  \"cluster_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"namespaces\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.app.perfectscale.io/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "836b4813-99b3-4840-b60c-0421e0380d7e",
+    "name": "PerfectScale Public Authentication Automation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PerfectScale provides a public API for managing Kubernetes cost optimization, cluster monitoring, workload metrics, and automation audit logs. Available with the EXPERT package.\n\nContact Support:\n Name: PerfectScale Support",
+      "type": "text/plain"
+    }
+  }
+}
