@@ -98,6 +98,9 @@ apis:
   - type: GettingStarted
     url: https://docs.perfectscale.io/
 common:
+  - type: CapabilityMap
+    url: capabilities/perfectscale-capability-edges.yml
+    name: PerfectScale Business Capability Map
   - type: AgenticAccess
     url: agentic-access/perfectscale-agentic-access.yml
   - type: DomainSecurity
