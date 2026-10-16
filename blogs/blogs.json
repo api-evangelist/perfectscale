@@ -1,0 +1,21 @@
+{
+  "repo": "perfectscale",
+  "feeds": [
+    {
+      "source": "https://www.perfectscale.io/blog",
+      "feed_url": "https://www.perfectscale.io/blog/feed.xml",
+      "title": "",
+      "saved": 7,
+      "method": "discovered"
+    },
+    {
+      "source": "https://www.perfectscale.io/blog/feed.xml",
+      "feed_url": "https://www.perfectscale.io/blog/feed.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "post_count": 7,
+  "fetched": "2026-10-10T13:15:00Z"
+}
